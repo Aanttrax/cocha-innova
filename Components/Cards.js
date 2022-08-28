@@ -28,15 +28,15 @@ export default function Cards() {
   };
   console.log(news);
 
-  useEffect(() => {
-    getNews();
-    const listener = navigation.addListener("didFocus", () => {
-      getNews();
-    });
-    return () => {
-      listener.remove();
-    };
-  }, []);
+  // useEffect(() => {
+  //   getNews();
+  //   const listener = navigation.addListener("didFocus", () => {
+  //     getNews();
+  //   });
+  //   return () => {
+  //     listener.remove();
+  //   };
+  // }, []);
 
   return (
     <FlatList

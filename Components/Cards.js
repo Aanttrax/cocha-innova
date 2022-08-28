@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, FlatList, Text, StyleSheet, Image } from "react-native-web";
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
 // import news from "./Aux/News";
 
 export default function Cards() {
+  const navigation = useNavigation();
   const [news, setNews] = useState([]);
 
   const getNews = async () => {
@@ -25,6 +27,17 @@ export default function Cards() {
     }
   };
   console.log(news);
+
+  useEffect(() => {
+    getNews();
+    const listener = navigation.addListener("didFocus", () => {
+      getNews();
+    });
+    return () => {
+      listener.remove();
+    };
+  }, []);
+
   return (
     <FlatList
       style={styles.cards}
